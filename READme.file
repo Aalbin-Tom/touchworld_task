@@ -1,0 +1,116 @@
+I have completed both task \\
+
+#TASK 1
+
+api== http://localhost:5000/excelImport
+methird: POST
+
+using the form-data passing the excel file of 20 users to insert in the MySql DB 
+Created a middlewear for the file upload using multer which we can insert more than 1 file at a time.
+Also have set validation for excel and xlsx extensions only on file upload.
+
+as per the requests have added validation on 
+    1) Age should be a number
+    2) date of Birth should be a date.
+    3) Address should have at least 25 characters. 
+
+And after the insertion of values, it will fetch the all users and save in Redis storage to save in cache memmory
+and sent response to postman.
+
+#REDIS CONNECTION :
+ const client = await createClient({
+                host: '127.0.0.1', 
+                port: 6379,       
+            })
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+#TASK 2
+This is also done in same project 
+path : backend/modulels/task2/empStatus.js
+api== http://localhost:5000/empStatus
+methord :GET
+
+In this task created 2 tables employees and empDetails  with id, name, email, phone, status.
+Using sequelize have fetch the data from the table by joing.
+
+INSERT empDEtails QUERY:  INSERT INTO empdetails (emp_id, jobsts)
+VALUES
+  (1,"pending"),
+  (2,"cancl"),
+  (3,"complete"),
+  (4, "pending"),
+  (5,"cancel"),
+   (1,"complete"),
+  (2,"cancl"),
+  (3,"pending"),
+  (4, "complete"),
+  (5,"pending"),
+
+  (1,"cancel"),
+  (2,"pending"),
+  (3,"complete"),
+  (4, "pending"),
+  (5,"cancel");
+
+  so on api call  result should be  (1,"cancel"), (2,"pending"), (3,"complete"), (4, "pending"), (5,"cancel");
+  and api response is :
+  {
+    "lastStaus": [
+        {
+            "id": 1,
+            "name": "John",
+            "email": "john@gmail.com",
+            "phone": "1234567890",
+            "empdetails": [
+                {
+                    "jobsts": "cancel"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Emily",
+            "email": "emily@gmail.com",
+            "phone": "1112223333",
+            "empdetails": [
+                {
+                    "jobsts": "pending"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Sivadas",
+            "email": "sivads@gmail.com",
+            "phone": "8287755893",
+            "empdetails": [
+                {
+                    "jobsts": "complete"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "John",
+            "email": "john@gmail.com",
+            "phone": "1234567890",
+            "empdetails": [
+                {
+                    "jobsts": "pending"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Alice",
+            "email": "alice@gmail.com",
+            "phone": "9876543210",
+            "empdetails": [
+                {
+                    "jobsts": "cancel"
+                }
+            ]
+        },
+    ]
+  }
